@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Interactive Quiz App</title>
+		<!-- Bootstrap CSS -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<!-- Custom CSS -->
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="row justify-content-center mt-5">
+				<div class="col-lg-8 col-md-10 col-12">
+					<!-- Initial Category and Difficulty Selection -->
+					<div id="category-selection">
+						<h3 class="text-center">Quiz Hub. Brain Teasers. 🏆</h3>
+						<form id="category-form">
+							<div class="mb-3">
+								<label for="category" class="form-label"
+									>Choose Category:</label
+								>
+								<select class="form-select" id="category" required>
+									<option value="general-knowledge">General Knowledge</option>
+									<option value="english">English</option>
+									<option value="computer">Computer</option>
+									<option value="science">Science</option>
+									<option value="mathematics">Mathematics</option>
+									<!-- Add more categories here -->
+								</select>
+							</div>
+							<div class="mb-3">
+								<label for="difficulty" class="form-label"
+									>Select Difficulty Level:</label
+								>
+								<select class="form-select" id="difficulty" required>
+									<option value="easy">Easy</option>
+									<option value="intermediate">Intermediate</option>
+									<option value="hard">Hard</option>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-primary w-100">
+								Start Quiz
+							</button>
+						</form>
+					</div>
+
+					<!-- Quiz Card -->
+					<div id="quiz-container" class="d-none">
+						<div class="card shadow-lg p-4">
+							<button
+								class="btn btn-secondary mb-3"
+								onclick="goBackToCategory()"
+							>
+								Back
+							</button>
+							<div
+								id="timer"
+								class="alert alert-info text-center"
+								style="
+									font-size: 18px;
+									margin-bottom: 10px;
+									max-width: 300px;
+									margin: 0 auto;
+								"
+							>
+								Time Left: 15s
+							</div>
+
+							<h3 id="question" class="card-title">Loading Question...</h3>
+							<div id="options" class="mb-4"></div>
+							<div id="feedback" class="text-center"></div>
+							<button
+								id="next-button"
+								class="btn btn-primary mt-3"
+								onclick="nextQuestion()"
+								disabled
+							>
+								Next
+							</button>
+						</div>
+						<audio id="correctSound" src="sound/correct.mp3"></audio>
+						<audio id="incorrectSound" src="sound/incorrect.mp3"></audio>
+						<audio id="timeoutSound" src="sound/timeout.mp3"></audio>
+					</div>
+
+					<!-- Result Container -->
+					<div id="resultsContainer" style="display: none">
+						<button class="btn btn-secondary mt-3" onclick="goBackToCategory()">
+							Back
+						</button>
+						<div
+							style="
+								width: 500;
+								height: 500;
+								border: 2px solid black;
+								margin-top: 10px;
+								margin-bottom: 10px;
+							"
+						>
+							<canvas id="scoreChart"></canvas>
+						</div>
+						<h2>Quiz Results</h2>
+						<p><strong>Accuracy:</strong> <span id="accuracy"></span>%</p>
+						<p>
+							<strong>Total Time Taken:</strong>
+							<span id="totalTime"></span> seconds
+						</p>
+						<p><strong>Correct Answers:</strong> <span id="correct"></span></p>
+						<p>
+							<strong>Incorrect Answers:</strong> <span id="incorrect"></span>
+						</p>
+						<p>
+							<strong>Unattempted Questions:</strong>
+							<span id="unattempted"></span>
+						</p>
+						<h3>Question Review</h3>
+						<ul id="questionReview"></ul>
+						<h3>Suggestions</h3>
+						<p id="suggestions"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Chart.js Library -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+		<!-- Bootstrap JS (For Bootstrap Components) -->
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+		<!-- Custom JS -->
+		<script src="script.js"></script>
+	</body>
+</html>
